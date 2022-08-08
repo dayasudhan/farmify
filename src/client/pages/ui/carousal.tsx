@@ -28,7 +28,6 @@ const App = () => {
   ];
   return (
     <div style={{ width: 500 }}>
-      <h1>Carousal Example</h1>
       <h2>
         <Link href="/">
           <a>Back to home</a>
