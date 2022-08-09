@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Input } from 'semantic-ui-react';
 
 export default class Header extends Component {
   state = { activeItem: 'home' };
@@ -10,23 +10,28 @@ export default class Header extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu inverted pointing secondary size="massive" color="teal">
+      <Menu inverted seconday pointing size="mini" color="blue">
         <Menu.Item
           name="home"
           active={activeItem === 'home'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name="messages"
-          active={activeItem === 'messages'}
+          name="Equipments"
+          active={activeItem === 'equipments'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name="friends"
-          active={activeItem === 'friends'}
+          name="Plants"
+          active={activeItem === 'plants'}
           onClick={this.handleItemClick}
         />
         <Menu.Menu position="right">
+          <Menu.Item>
+            <Input icon="search" placeholder="Search..." />
+          </Menu.Item>
+        </Menu.Menu>
+        {/* <Menu.Menu position="right">
           <Menu.Item
             name="Register"
             active={activeItem === 'Register'}
@@ -37,7 +42,7 @@ export default class Header extends Component {
             active={activeItem === 'login'}
             onClick={this.handleItemClick}
           />
-        </Menu.Menu>
+        </Menu.Menu> */}
       </Menu>
     );
   }
