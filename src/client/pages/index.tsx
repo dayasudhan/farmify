@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <h1 className="title">
       Read{' '}
-      <Link href="/ui/landing">
+      <Link href="/buyer/landing/landing">
         <a>Carousal!</a>
       </Link>
     </h1>

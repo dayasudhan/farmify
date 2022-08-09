@@ -1,6 +1,6 @@
 import React from 'react';
-import './Item.scss';
 import { Image, List, Rating } from 'semantic-ui-react';
+import Link from 'next/link';
 
 const Item = () => (
   <div>
@@ -16,7 +16,10 @@ const Item = () => (
       </div>
       <div className="product-content">
         <h3 className="ui header">
-          Text 1
+          <Link href="/buyer/product/product">
+            <a>Text 1</a>
+          </Link>
+
           <div href="#" className="sub header">
             Text 2
           </div>

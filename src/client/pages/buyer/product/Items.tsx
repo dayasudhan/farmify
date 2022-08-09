@@ -1,6 +1,5 @@
 import React from 'react';
 import Item from './Item';
-//import Item1 from './Item1';
 import { Grid, Segment } from 'semantic-ui-react';
 
 const Items = () => (
@@ -10,15 +9,6 @@ const Items = () => (
     </Segment>
     <Grid Doubling container columns={3}>
       <Grid.Row columns={4}>
-        <Grid.Column>
-          <Item />
-        </Grid.Column>
-        <Grid.Column>
-          <Item />
-        </Grid.Column>
-        <Grid.Column>
-          <Item />
-        </Grid.Column>
         <Grid.Column>
           <Item />
         </Grid.Column>
