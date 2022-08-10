@@ -16,8 +16,8 @@ const Item = () => (
       </div>
       <div className="product-content">
         <h3 className="ui header">
-          <Link href="/buyer/product/product">
-            <a>Product1</a>
+          <Link href="/buyer/cart/cart">
+            <a>buy</a>
           </Link>
 
           <div href="#" className="sub header">
