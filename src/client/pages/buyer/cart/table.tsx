@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Image, Button } from 'semantic-ui-react';
-
+import Link from 'next/link';
 const TableExampleCollapsing = () => {
   return (
     <div>
@@ -70,6 +70,9 @@ const TableExampleCollapsing = () => {
         <Button color="primary" style={{ marginLeft: 'auto' }}>
           Buy
         </Button>
+        <Link href="/buyer/checkout/checkout">
+          <a>Checkout</a>
+        </Link>
       </div>
     </div>
   );
