@@ -7,7 +7,7 @@ const Item = () => (
     <div className="product-grid6">
       <div className="product-image6">
         <Image
-          src="https://semantic-ui.com/images/wireframe/image.png"
+          src="https://5.imimg.com/data5/AY/PU/MY-6627052/tissue-culture-banana-plant-500x500.jpg"
           size="medium"
           as="a"
           href="#"
@@ -17,7 +17,7 @@ const Item = () => (
       <div className="product-content">
         <h3 className="ui header">
           <Link href="/buyer/product/product">
-            <a>Text 1</a>
+            <a>Text 122</a>
           </Link>
 
           <div href="#" className="sub header">

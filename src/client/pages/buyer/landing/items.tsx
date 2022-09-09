@@ -5,7 +5,7 @@ import { Grid, Segment } from 'semantic-ui-react';
 const Items = () => (
   <Segment>
     <Segment inverted color="teal" textAlign="left">
-      Category 1
+      Category 123
     </Segment>
     <Grid Doubling container columns={3}>
       <Grid.Row columns={4}>

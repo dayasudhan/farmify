@@ -1,9 +1,19 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Req,
+  Res,
+  Post,
+  Get,
+  Body,
+  Query,
+  Param,
+} from '@nestjs/common';
 import { UserService } from './user.service';
+import { ItemService } from './item.service';
 
 @Controller('')
 export class UserController {
-  constructor(private service: UserService) {}
+  constructor(private service: UserService, private itemService: ItemService) {}
   @Get('/a')
   test() {
     return 'pong a123';
@@ -28,6 +38,30 @@ export class UserController {
   async update(@Req() req: any, @Res() res: any) {
     const ret = await this.service.update();
     console.log('return', ret);
+    res.send(ret);
+  }
+  @Get('/vendor')
+  async menu(@Req() req: any, @Res() res: any) {
+    const ret = await this.itemService.findAll();
+    console.log('return', ret);
+    res.send(ret);
+  }
+  @Get('/menu')
+  async menu2(@Req() req: any, @Res() res: any) {
+    const ret = await this.itemService.findMenuAll();
+    console.log('return', ret);
+    res.send(ret);
+  }
+  @Get('/vendorid')
+  async findmfindById(@Req() req: any, @Res() res: any) {
+    const ret = await this.itemService.findById();
+    console.log('return', ret);
+    res.send(ret);
+  }
+  @Get('/findone')
+  async findone(@Query('id') id: string, @Req() req: any, @Res() res: any) {
+    const ret = await this.itemService.findOne(id);
+    console.log('return findone', ret);
     res.send(ret);
   }
 }
