@@ -22,6 +22,15 @@ export class ItemService {
   async findMenuAll(): Promise<VendorInfoSchema[]> {
     return await this.vendorModel.find({}, 'menu');
   }
+  async findByMenuId(id): Promise<VendorInfoSchema> {
+    const ret = await this.vendorModel.find({}, 'menu').exec();
+    const t = JSON.stringify(ret);
+    const r = JSON.parse(t);
+    const p = r[0]['menu'];
+    let obj = p.find((o) => o._id === id);
+    console.log('ret findByMenuId', r[0]['menu'], obj);
+    return obj;
+  }
   // async readById(): Promise<Counters> {
   //   return await this.counterModel.findById('hotel').exec();
   // }

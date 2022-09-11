@@ -52,10 +52,15 @@ export class UserController {
     console.log('return', ret);
     res.send(ret);
   }
-  @Get('/vendorid')
-  async findmfindById(@Req() req: any, @Res() res: any) {
-    const ret = await this.itemService.findById();
-    console.log('return', ret);
+  @Get('/menuid')
+  async findmfindById(
+    @Query('id') id: string,
+    @Req() req: any,
+    @Res() res: any,
+  ) {
+    const ret = await this.itemService.findByMenuId(id);
+    console.log('return', ret['menu']);
+
     res.send(ret);
   }
   @Get('/findone')

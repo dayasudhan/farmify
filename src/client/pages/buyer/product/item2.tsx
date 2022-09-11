@@ -1,39 +1,40 @@
 import React from 'react';
 import { Grid, Image, Rating, Form, Button } from 'semantic-ui-react';
 import Link from 'next/link';
-const GridExampleVerticallyDivided = () => {
+const GridExampleVerticallyDivided = (props) => {
+  const [prd, setPrd] = React.useState(props);
   return (
     <Grid divided="vertically">
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Image src="https://demo.opencart.com/image/cache/catalog/demo/macbook_1-500x500.jpg" />
+          <Image src={props.data.menu.logo} />
         </Grid.Column>
         <Grid.Column>
           <div>
             <Link href="/buyer/cart/cart">
-              <a>Text 1</a>
+              <a>{props.data.name}</a>
             </Link>
             <h1 className="ui header">
               <div href="#" className="header">
-                MacBook
+                {props.data.menu.name}
               </div>
             </h1>
 
             <br />
             <br />
             <div className="price">
-              Brand: Apple
+              {props.data.menu.description}
               <br />
               Product Code: Product 16
               <br />
               Reward Points: 600 <br />
-              Availability: In Stock
+              Availability: {props.data.menu.availability}
               <br />
             </div>
             <Rating icon="star" defaultRating={5} maxRating={5} />
             <h3 className="ui header">
               <div href="#" className="header">
-                Rs 50000
+                Rs {props.data.menu.price}
               </div>
               <br />
               <div className="price">
