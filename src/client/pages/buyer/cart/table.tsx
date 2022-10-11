@@ -68,12 +68,11 @@ const TableExampleCollapsing = () => {
         </Table.Footer>
       </Table>
       <div style={{ display: 'flex' }}>
-        <Button color="primary" style={{ marginLeft: 'auto' }}>
-          Buy
-        </Button>
-        <Link href="/buyer/checkout/checkout">
-          <a>Checkout</a>
-        </Link>
+        <a href="/buyer/checkout/checkout">
+          <Button color="primary" style={{ marginLeft: 'auto' }}>
+            Buy
+          </Button>
+        </a>
       </div>
     </div>
   );

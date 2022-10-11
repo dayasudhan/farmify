@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Image, Rating, Form, Button } from 'semantic-ui-react';
 import Link from 'next/link';
+import Cart from './../cart/cart';
 const GridExampleVerticallyDivided = (props) => {
   const [prd, setPrd] = React.useState(props);
   return (
@@ -39,13 +40,15 @@ const GridExampleVerticallyDivided = (props) => {
               <br />
               <div className="price">
                 <Form.Field>
-                  <label>Quantity2 </label>
+                  <label>Quantity</label>
                   <input type="number" width={2} max={2} />
                 </Form.Field>
               </div>
               <br />
               <div>
-                <Button primary>Buy</Button>
+                <a href="/buyer/cart/cart">
+                  <Button primary>Buy1</Button>
+                </a>
               </div>
             </h3>
           </div>
