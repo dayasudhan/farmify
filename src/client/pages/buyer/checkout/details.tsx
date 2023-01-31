@@ -1,37 +1,62 @@
 import React from 'react';
-import { Segment, Input, Label, Form } from 'semantic-ui-react';
+import { Segment, Input, Label, Form, Button } from 'semantic-ui-react';
 
 const SegmentExampleNestedSegments = () => (
   <Segment.Group>
     <Segment.Group horizontal>
       <Segment>
-        Your Payment Details
+        Shipping Details
+        <p></p>{' '}
+        <Form.Field>
+          <Input focus placeholder="Name..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="Land Mark..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="Village/City..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="Address..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="District..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="State..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="Pin Code..." />
+        </Form.Field>
+        <p></p>
+        <Form.Field>
+          <Input focus placeholder="Phone Number" />
+        </Form.Field>
+        <p></p>
+        <div style={{ display: 'flex' }}>
+          <a href="/buyer/checkout/checkout">
+            <Button color="primary" style={{ marginLeft: 'auto' }}>
+              Complete Order
+            </Button>
+          </a>
+        </div>
+      </Segment>
+
+      {/* <Segment>
+        Payment Method (Future mPurpose)
         <Segment.Group>
-          <Segment>
-            <Form.Field>
-              <Label>Name</Label>
-              <Input focus placeholder="Search..." />
-            </Form.Field>
-          </Segment>
-          <Segment>
-            <Form.Field>
-              <Label pointing="below">Please enter a value</Label>
-              <Input type="text" placeholder="Last Name" />
-            </Form.Field>
-          </Segment>
           <Segment>Middle</Segment>
           <Segment>Middle</Segment>
         </Segment.Group>
-      </Segment>
-      <Segment>
-        Payment Method
-        <Segment.Group>
-          <Segment>Middle</Segment>
-          <Segment>Middle</Segment>
-        </Segment.Group>
-      </Segment>
+      </Segment> */}
     </Segment.Group>
-    <Segment.Group horizontal>
+    {/* <Segment.Group horizontal>
       <Segment>
         Delivery Address
         <Segment.Group>
@@ -46,7 +71,7 @@ const SegmentExampleNestedSegments = () => (
           <Segment>Middle</Segment>
         </Segment.Group>
       </Segment>
-    </Segment.Group>
+    </Segment.Group> */}
   </Segment.Group>
 );
 
