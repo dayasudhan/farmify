@@ -34,12 +34,12 @@ const SegmentExampleNestedSegments = () => {
     console.log("name",name)
     event.preventDefault()
     console.log("formData",formData)
-    axios.post('/leads', formData)
+    axios.post('/seller/post', formData)
     .then(response => {
-      console.log("response1",response);
-      console.log("response2",response?.data?.insertedId);
+      // console.log("response1",response);
+      // console.log("response2",response?.data?.insertedId);
       setTimeout(() => {
-        setResponseText(`Customer Inserted Successfully With Id : ${response?.data?.insertedId}`); // Set the response text to be shown in the modal
+        setResponseText(`Item Posted Successfully With Id : ${response?.data?.id}`); // Set the response text to be shown in the modal
         setShowModal(true); // Show the modal
       }, 1000); // Delay of 1 second
     })
@@ -60,21 +60,21 @@ const SegmentExampleNestedSegments = () => {
         <Form ref={formRef} onSubmit={handleSubmit}>
         <Form.Field>
         <label>Item Details</label>
-        <Input name="name" 
+        <Input name="item_name" 
           focus placeholder="Item Name..."
           value={formData.item_name} 
           onChange={handleInputChange} />
         </Form.Field>
         <p></p>
         <Form.Field>
-          <Input name="Manufacturing Year"
+          <Input name="item_year"
            focus placeholder="Item Year"
            value={formData.item_year} 
            onChange={handleInputChange} />
         </Form.Field>
         <p></p>
         <Form.Field>
-          <Input name="Price"
+          <Input name="item_price"
           focus placeholder="Item Rate/Price..." 
           value={formData.item_price} 
           onChange={handleInputChange}
@@ -82,7 +82,7 @@ const SegmentExampleNestedSegments = () => {
         </Form.Field>
         <p></p>
         <Form.Field>
-          <Input name="Place"
+          <Input name="item_place"
           focus placeholder="Item Place..." 
           value={formData.item_place} 
           onChange={handleInputChange}

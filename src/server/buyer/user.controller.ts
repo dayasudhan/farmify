@@ -69,4 +69,10 @@ export class UserController {
     console.log('return findone', ret);
     res.send(ret);
   }
+  // @Get('/post')
+  // async post(@Req() req: any, @Res() res: any) {
+  //   const ret = await this.itemService.findAll();
+  //   console.log('return', ret);
+  //   res.send(ret);
+  // }
 }

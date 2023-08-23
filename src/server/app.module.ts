@@ -6,15 +6,14 @@ import { CommonModule } from './common/common.module';
 import { BuyerModule } from './buyer/buyer.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-const MONGOURI ='mongodb+srv://heroku_z21t18n4:sudhan@cluster-z21t18n4.g35xm.mongodb.net/heroku_z21t18n4?retryWrites=true&w=majority'
-const MONGOURI2 ='mongodb+srv://heroku_mhgndgwl:sudhan@cluster0.3b3lz.mongodb.net/?retryWrites=true&w=majority'  
+
 @Module({
   imports: [
     CommonModule,
     BuyerModule,
     ViewModule,
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/farm'),
-    //"mongodb+srv://heroku_mhgndgwl:sudhan@cluster0.3b3lz.mongodb.net/?retryWrites=true&w=majority";
+    
   ],
   controllers: [],
   providers: [],

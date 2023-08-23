@@ -7,6 +7,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Counters, CountersSchema } from '../schemas/counter.schema';
 import { VendorDocument, VendorInfoSchema } from '../schemas/vendor.schema';
 import { Vendorchema } from '../schemas/vendor.schema';
+import { SellerController } from './seller.controller';
+import { SellerService } from './seller.service';
 @Module({
   imports: [
     CommonModule,
@@ -15,7 +17,7 @@ import { Vendorchema } from '../schemas/vendor.schema';
       { name: VendorInfoSchema.name, schema: Vendorchema },
     ]),
   ],
-  controllers: [UserController],
-  providers: [UserService, ItemService],
+  controllers: [UserController,SellerController],
+  providers: [UserService, ItemService,SellerService],
 })
 export class BuyerModule {}
