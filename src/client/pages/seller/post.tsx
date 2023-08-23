@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
-import ImageCarousel from '../landing/carousal';
-import Header from '../../common/header';
-import Header2 from '../../common/header2';
-import Footer from '../../common/footer';
+import Header from '../common/header';
+
+import Footer from '../common/footer';
 import 'semantic-ui-css/semantic.css';
-import PersonDetails from './details';
+import ItemDetails from './ItemDetails';
 
 export default class Cart extends Component {
   render() {
     return (
       <Segment>
         <Header />
-        <PersonDetails />
+        <ItemDetails />
         <Footer />
       </Segment>
     );
