@@ -6,6 +6,7 @@ const SegmentExampleNestedSegments = () => {
   const [showModal, setShowModal] = useState(false);
   const [responseText, setResponseText] = useState('');
   const formRef = useRef(null);
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -17,17 +18,18 @@ const SegmentExampleNestedSegments = () => {
     item_year:"",
     item_price:"",
     item_place:"",
-    billingInstructions:""
+    billingInstructions:"",
+    image:""
   });
-
+  
   const handleInputChange = (event) => {
     console.log("event",event.target)
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleRadioInputChange = (name,value) => {
-    console.log("handleRadioInputChange",name,value)
-    setFormData({ ...formData, [name]: value });
+  const handleImageChange = (event) => {
+    setFormData({ ...formData, ['image']: event.target.files[0] });
+    //setImage(event.target.files[0]);
   };
 
   const handleSubmit = (event) => {
@@ -47,6 +49,26 @@ const SegmentExampleNestedSegments = () => {
       console.error("error",error);
     });
   }
+  const handleSubmit2 = async (event) => {
+    try {
+      const response = await axios.post('/seller/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        console.log('Image uploaded successfully');
+        // Reset form fields
+        //setTitle('');
+        setImage(null);
+      } else {
+        console.error('Image upload failed');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
   const closeModal = () => {
     setShowModal(false);
     location.reload();
@@ -57,7 +79,7 @@ const SegmentExampleNestedSegments = () => {
       <Segment>
       <Segment textAlign='center'> <h3>Item Details</h3></Segment>
         <p></p>{' '}
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit2}>
         <Form.Field>
         <label>Item Details</label>
         <Input name="item_name" 
@@ -135,10 +157,7 @@ const SegmentExampleNestedSegments = () => {
           onChange={handleInputChange}
           />
         </Form.Field>
-        <p></p>
-      
-          
-     
+        <p></p>    
         <Form.Field>
           <label>Item Details</label>
           <TextArea name='billingInstructions'
@@ -147,6 +166,15 @@ const SegmentExampleNestedSegments = () => {
           value={formData.billingInstructions} 
           onChange={handleInputChange}/>
         </Form.Field>
+        <div>
+          <label htmlFor="image">Image:</label>
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </div>
         <div style={{ display: 'flex' }}>
         
           <Button primary style={{ marginLeft: 'auto' }}>

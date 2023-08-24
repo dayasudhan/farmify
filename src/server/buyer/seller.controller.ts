@@ -7,10 +7,28 @@ import {
   Body,
   Query,
   Param,
+  UploadedFile, UseInterceptors
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ItemService } from './item.service';
 import { SellerService } from './seller.service';
+import * as multer from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express';
+
+const storage = multer.diskStorage({
+  destination: './uploads',
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    let fileFormat = '.jpg'; 
+    
+    if (file.mimetype === 'image/png') {
+      fileFormat = '.png';
+    } else if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
+      fileFormat = '.jpeg';
+    }
+    cb(null, file.fieldname + '-' + uniqueSuffix + fileFormat);
+  },
+});
 
 @Controller('seller')
 export class SellerController {
@@ -33,59 +51,24 @@ export class SellerController {
   @Post('/post')
   async post(@Req() req: any, @Res() res: any) {
 
-    // const item = {"name":"cltivator","year":"2020"}
-    // const ret = await this.service.insertItem(item);
     console.log('request body', req.body);
     const ret = await this.service.insertItem(req.body);
     console.log('return', ret);
     res.send(ret);
   }
-  // @Get('/c')
-  // async test3(@Req() req: any, @Res() res: any) {
-  //   const ret = await this.service.findAll();
-  //   console.log('return', ret);
-  //   res.send(ret);
-  // }
-  // @Get('/d')
-  // async test4(@Req() req: any, @Res() res: any) {
-  //   const ret = await this.service.readById();
-  //   console.log('return', ret);
-  //   res.send(ret);
-  // }
-  // @Get('/e')
-  // async update(@Req() req: any, @Res() res: any) {
-  //   const ret = await this.service.update();
-  //   console.log('return', ret);
-  //   res.send(ret);
-  // }
-  // @Get('/vendor')
-  // async menu(@Req() req: any, @Res() res: any) {
-  //   const ret = await this.itemService.findAll();
-  //   console.log('return', ret);
-  //   res.send(ret);
-  // }
-  // @Get('/menu')
-  // async menu2(@Req() req: any, @Res() res: any) {
-  //   const ret = await this.itemService.findMenuAll();
-  //   console.log('return', ret);
-  //   res.send(ret);
-  // }
-  // @Get('/menuid')
-  // async findmfindById(
-  //   @Query('id') id: string,
-  //   @Req() req: any,
-  //   @Res() res: any,
-  // ) {
-  //   const ret = await this.itemService.findByMenuId(id);
-  //   console.log('return', ret['menu']);
-
-  //   res.send(ret);
-  // }
-  // @Get('/findone')
-  // async findone(@Query('id') id: string, @Req() req: any, @Res() res: any) {
-  //   const ret = await this.itemService.findOne(id);
-  //   console.log('return findone', ret);
-  //   res.send(ret);
-  // }
+  @Post('/upload')
+  @UseInterceptors(FileInterceptor('image', { storage }))
+  async upload(@UploadedFile() file, @Body() body, @Req() req: any, @Res() res: any) {
+    console.log("i am inside upload")
+    if (!file || !req.file) {
+      return res.status(400).json({ message: 'No image uploaded' });
+    }
+    const title = body.title; 
+    console.log('Uploaded file:', req.file);
+    console.log('Uploaded body:', req.body);
+    const ret = await this.service.insertItem(req.body);
+    console.log('return', ret);
+    res.send(ret);
+  }
 
 }
