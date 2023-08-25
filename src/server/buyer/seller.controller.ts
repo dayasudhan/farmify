@@ -9,12 +9,10 @@ import {
   Param,
   UploadedFile, UseInterceptors
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { ItemService } from './item.service';
 import { SellerService } from './seller.service';
 import * as multer from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
-
+import { AwsService } from './aws.service';
 const storage = multer.diskStorage({
   destination: './uploads',
   filename: (req, file, cb) => {
@@ -32,23 +30,26 @@ const storage = multer.diskStorage({
 
 @Controller('seller')
 export class SellerController {
-  constructor(private service: SellerService) {}
+  constructor(private service: SellerService,
+    private readonly appService: AwsService) {}
 
   @Post('/upload')
-  @UseInterceptors(FileInterceptor('image', { storage }))
+  @UseInterceptors(FileInterceptor('image'))
   async upload(@UploadedFile() file, @Body() body, @Req() req: any, @Res() res: any) {
     console.log("i am inside upload")
     if (!file || !req.file) {
       return res.status(400).json({ message: 'No image uploaded' });
     }
+    const s3_ret = await  this.appService.uploadFile(file);
+    console.log("ret",s3_ret)
     const title = body.title; 
     console.log('Uploaded file:', req.file);
     console.log('Uploaded body:', req.body);
-    const inp = {...req.body,"image_urls":[file.path]}
+    const inp = {...req.body,"image_urls":[s3_ret.Location]}
     console.log("inp",inp)
-    const ret = await this.service.insertItem(inp);
-    console.log('return', ret);
-    res.send(ret);
+    const ret2 = await this.service.insertItem(inp);
+    console.log('return', ret2);
+    res.send(ret2);
   }
   @Get('/a')
   test() {

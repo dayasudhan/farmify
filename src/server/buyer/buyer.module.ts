@@ -9,6 +9,7 @@ import { VendorDocument, VendorInfoSchema } from '../schemas/vendor.schema';
 import { Vendorchema } from '../schemas/vendor.schema';
 import { SellerController } from './seller.controller';
 import { SellerService } from './seller.service';
+import { AwsService } from './aws.service';
 @Module({
   imports: [
     CommonModule,
@@ -18,6 +19,6 @@ import { SellerService } from './seller.service';
     ]),
   ],
   controllers: [UserController,SellerController],
-  providers: [UserService, ItemService,SellerService],
+  providers: [UserService, ItemService,SellerService,AwsService],
 })
 export class BuyerModule {}
