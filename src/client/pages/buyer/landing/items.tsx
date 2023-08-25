@@ -3,7 +3,8 @@ import Item from './item';
 import { Grid, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000/menu';
+const baseURL = 'http://localhost:3000/seller/items';
+//const baseURL = 'http://localhost:3000/menu';
 const Items = () => {
   const [menu, setMenu] = React.useState([
     {
@@ -24,7 +25,7 @@ const Items = () => {
           availability: 1,
           timings: 12,
           description: 'canon camera',
-          logo: 'https://demo.opencart.com/image/cache/catalog/demo/canon_eos_5d_2-800x800.jpg',
+          logo: '../../../../uploads/image-1692898087383-388874256.jpeg',
           _id: '62fd295cd6fb4aee822d1a1e',
         },
         {
@@ -66,11 +67,11 @@ const Items = () => {
   return (
     <Segment>
       <Segment inverted color="teal" textAlign="left">
-        {menu[0]?.menu[0]?.name}
+        Items
       </Segment>
       <Grid Doubling container columns={3}>
         <Grid.Row columns={4}>
-          {menu[0]?.menu?.map((element) => (
+          {menu?.map((element) => (
             <Grid.Column>
               <Item data={element} />
             </Grid.Column>

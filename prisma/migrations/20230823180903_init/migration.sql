@@ -15,3 +15,6 @@ CREATE TABLE "people" (
 
     CONSTRAINT "people_pkey" PRIMARY KEY ("id")
 );
+
+ALTER TABLE "products"
+ADD COLUMN image_urls TEXT[];

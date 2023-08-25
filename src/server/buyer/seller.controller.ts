@@ -66,7 +66,9 @@ export class SellerController {
     const title = body.title; 
     console.log('Uploaded file:', req.file);
     console.log('Uploaded body:', req.body);
-    const ret = await this.service.insertItem(req.body);
+    const inp = {...req.body,"image_urls":[file.path]}
+    console.log("inp",inp)
+    const ret = await this.service.insertItem(inp);
     console.log('return', ret);
     res.send(ret);
   }

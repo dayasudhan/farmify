@@ -13,6 +13,10 @@ model Products {
   id        Int      @default(autoincrement()) @id
   name     String?
   year     String?
+  image_urls String[]
+  price   Int?
+  availability Int?
+  description   String?
   // price    String?
   // content   String?
   // published Boolean? @default(false)

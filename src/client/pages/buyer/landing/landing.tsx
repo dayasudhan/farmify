@@ -14,7 +14,7 @@ export default class Landing extends Component {
       <Segment>
         <Header2 />
         <Header />
-        <ImageCarousel />
+        {/* //<ImageCarousel /> */}
         <Items />
         <Footer />
       </Segment>

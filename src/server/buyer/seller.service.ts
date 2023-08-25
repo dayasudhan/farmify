@@ -15,10 +15,12 @@ export class SellerService {
     return result;
   }
   async  insertItem(data) {
+    console.log("data",data)
     const item = await this.db.products.create({
       data: {
         name: data.item_name,
         year: data.item_year,
+        image_urls:data.image_urls
         // Other fields from your User model
       },
     });
