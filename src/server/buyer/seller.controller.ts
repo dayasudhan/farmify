@@ -33,6 +33,23 @@ const storage = multer.diskStorage({
 @Controller('seller')
 export class SellerController {
   constructor(private service: SellerService) {}
+
+  @Post('/upload')
+  @UseInterceptors(FileInterceptor('image', { storage }))
+  async upload(@UploadedFile() file, @Body() body, @Req() req: any, @Res() res: any) {
+    console.log("i am inside upload")
+    if (!file || !req.file) {
+      return res.status(400).json({ message: 'No image uploaded' });
+    }
+    const title = body.title; 
+    console.log('Uploaded file:', req.file);
+    console.log('Uploaded body:', req.body);
+    const inp = {...req.body,"image_urls":[file.path]}
+    console.log("inp",inp)
+    const ret = await this.service.insertItem(inp);
+    console.log('return', ret);
+    res.send(ret);
+  }
   @Get('/a')
   test() {
     return 'pong a123';
@@ -56,21 +73,4 @@ export class SellerController {
     console.log('return', ret);
     res.send(ret);
   }
-  @Post('/upload')
-  @UseInterceptors(FileInterceptor('image', { storage }))
-  async upload(@UploadedFile() file, @Body() body, @Req() req: any, @Res() res: any) {
-    console.log("i am inside upload")
-    if (!file || !req.file) {
-      return res.status(400).json({ message: 'No image uploaded' });
-    }
-    const title = body.title; 
-    console.log('Uploaded file:', req.file);
-    console.log('Uploaded body:', req.body);
-    const inp = {...req.body,"image_urls":[file.path]}
-    console.log("inp",inp)
-    const ret = await this.service.insertItem(inp);
-    console.log('return', ret);
-    res.send(ret);
-  }
-
 }
