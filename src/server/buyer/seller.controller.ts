@@ -43,12 +43,12 @@ export class SellerController {
     const s3_ret = await  this.appService.uploadFile(file);
     console.log("ret",s3_ret)
     const title = body.title; 
-    console.log('Uploaded file:', req.file);
-    console.log('Uploaded body:', req.body);
+    // console.log('Uploaded file:', req.file);
+    // console.log('Uploaded body:', req.body);
     const inp = {...req.body,"image_urls":[s3_ret.Location]}
-    console.log("inp",inp)
+    //console.log("inp",inp)
     const ret2 = await this.service.insertItem(inp);
-    console.log('return', ret2);
+    //console.log('return', ret2);
     res.send(ret2);
   }
   @Get('/a')

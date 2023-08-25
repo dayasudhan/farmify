@@ -15,7 +15,7 @@ export class SellerService {
     return result;
   }
   async  insertItem(data) {
-    console.log("data",data)
+   // console.log("data",data)
     const item = await this.db.products.create({
       data: {
         name: data.item_name,
