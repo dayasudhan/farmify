@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, List, Rating } from 'semantic-ui-react';
 import Link from 'next/link';
-const baseURL = '/buyer/product/product?id=';
+const baseURL = '/buyer/product/item?id=';
 const Item = (props) => {
   const [url, setUrl] = React.useState(baseURL + props.data.id);
   const imageUrl = props.data.image_urls ? props.data.image_urls[0] : null;
