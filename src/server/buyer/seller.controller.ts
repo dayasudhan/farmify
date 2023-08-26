@@ -73,8 +73,13 @@ export class SellerController {
     return 'pong a123';
   }
   @Get('/items')
-  async test2(@Req() req: any, @Res() res: any) {
-    res.send(await this.service.test());
+  async items(@Req() req: any, @Res() res: any) {
+    res.send(await this.service.getAllItems());
+  }
+  @Get('/items/:id')
+  async item(@Req() req: any, @Res() res: any) {
+    console.log("req",req.params.id)
+    res.send(await this.service.getItem(parseInt(req.params.id)));
   }
   @Get('/post1')
   async post1(@Req() req: any, @Res() res: any) {

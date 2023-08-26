@@ -3,12 +3,17 @@ import { Grid, Image, Rating, Form, Button } from 'semantic-ui-react';
 import Link from 'next/link';
 import Cart from './../cart/cart';
 const GridExampleVerticallyDivided = (props) => {
-  const [prd, setPrd] = React.useState(props);
+  console.log("props",props);
+  const imageUrl = props.data.item.image_urls ? props.data.item.image_urls[0] : null;
+  // console.log("imageUrl",imageUrl,props.data.item.image_urls);
+  // const [prd, setPrd] = React.useState(props);
   return (
     <Grid divided="vertically">
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Image src={props.data.menu.logo} />
+          {imageUrl && (
+            <Image src={imageUrl} />
+          )}
         </Grid.Column>
         <Grid.Column>
           <div>
@@ -17,25 +22,25 @@ const GridExampleVerticallyDivided = (props) => {
             </Link>
             <h1 className="ui header">
               <div href="#" className="header">
-                {props.data.menu.name}
+                {props.data.item.name}
               </div>
             </h1>
 
             <br />
             <br />
             <div className="price">
-              {props.data.menu.description}
+              {props.data.item.description}
               <br />
               Product Code: Product 16
               <br />
               Reward Points: 600 <br />
-              Availability: {props.data.menu.availability}
+              Availability: {props.data.item.availability}
               <br />
             </div>
             <Rating icon="star" defaultRating={5} maxRating={5} />
             <h3 className="ui header">
               <div href="#" className="header">
-                Rs {props.data.menu.price}
+                Rs {props.data.item.price}
               </div>
               <br />
               <div className="price">

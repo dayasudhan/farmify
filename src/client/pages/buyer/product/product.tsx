@@ -15,11 +15,12 @@ interface WithRouterProps {
   router: NextRouter;
 }
 interface MyComponentProps extends WithRouterProps {}
-const baseURL = 'http://localhost:3000/menuid?id=';
+//const baseURL = 'http://localhost:3000/menuid?id=';
+const baseURL = 'http://localhost:3000/seller/items/';
 class Product extends Component<MyComponentProps> {
   constructor(props) {
     super(props);
-    this.state = { menu: '' };
+    this.state = { item: '' };
   }
   componentDidMount() {
     setTimeout(() => {
@@ -27,7 +28,7 @@ class Product extends Component<MyComponentProps> {
       console.log('reacteffect', finalURL);
       axios.get(finalURL).then((response) => {
         console.log('response product', response.data);
-        this.setState({ menu: response.data });
+        this.setState({ item: response.data });
         // console.log('response state', this.state);
       });
     }, 5000);

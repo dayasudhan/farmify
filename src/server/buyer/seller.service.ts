@@ -9,8 +9,17 @@ export class SellerService {
   constructor(
     private db: PrismaService,
   ) {}
-  async test() {
+  async getAllItems() {
     const result = await this.db.products.findMany({});
+    console.log('result', result);
+    return result;
+  }
+  async getItem(id) {
+    const result = await this.db.products.findUnique({
+      where: {
+        id,
+      },
+    });
     console.log('result', result);
     return result;
   }
