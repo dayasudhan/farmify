@@ -4,10 +4,18 @@ import React, { Component, useEffect ,useState} from 'react';
 
 import Header from '../../common/header';
 import Footer from '../../common/footer';
+import ImageGallery from './imagegallery';
+import ImageGallery2 from './horizontalgalley';
 import 'semantic-ui-css/semantic.css';
 import axios from 'axios';
 import Link from 'next/link';
 const baseURL = 'http://localhost:3000/seller/items/';
+const imageUrls = [
+  'https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-727480561-1692988538613-.jpeg',
+  'https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-293414261-1692988555040-.jpeg',
+  'https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-928438411-1692987981531-.jpeg',
+  "https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-935641903-1692988052616-.jpeg",
+];
 const Item = () => {
 
  const [data,setData] = useState(null) 
@@ -36,9 +44,12 @@ const Item = () => {
     <Grid divided="vertically">
       <Grid.Row columns={2}>
         <Grid.Column>
-          {imageUrl && (
+          {/* {imageUrl && (
             <Image src={imageUrl} />
-          )}
+          )} */}
+   
+           <ImageGallery2 imageUrls={imageUrls}/>
+      
         </Grid.Column>
         <Grid.Column>
           <div>
