@@ -68,10 +68,7 @@ export class SellerController {
       console.log('return', ret);
       res.send(ret);
     }
-  @Get('/a')
-  test() {
-    return 'pong a123';
-  }
+
   @Get('/items')
   async items(@Req() req: any, @Res() res: any) {
     res.send(await this.service.getAllItems());
