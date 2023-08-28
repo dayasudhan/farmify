@@ -8,17 +8,17 @@ const SegmentExampleNestedSegments = () => {
   const formRef = useRef(null);
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    email: "",
+    name: "Devraj",
+    phone: "956629075",
+    address: "Kuruva,Honnali,Davangere,Karnataka",
+    email: "dayasudhankg@gmail.com",
     landMark:"",
-    city:"",
+    city:"Shimoga",
     item_name:"",
-    item_year:"",
-    item_price:"",
+    item_year:"2020",
+    item_price:"25000",
     item_place:"",
-    billingInstructions:"",
+    description:"Sample description",
     image:""
   });
   
@@ -29,42 +29,23 @@ const SegmentExampleNestedSegments = () => {
   };
   const handleImageChange = (event) => {
     setFormData({ ...formData, ['image']: event.target.files[0] });
-    //setImage(event.target.files[0]);
   };
 
-  const handleSubmit = (event) => {
-    console.log("name",name)
-    event.preventDefault()
-    console.log("formData",formData)
-    axios.post('/seller/post', formData)
-    .then(response => {
-      // console.log("response1",response);
-      // console.log("response2",response?.data?.insertedId);
-      setTimeout(() => {
-        setResponseText(`Item Posted Successfully With Id : ${response?.data?.id}`); // Set the response text to be shown in the modal
-        setShowModal(true); // Show the modal
-      }, 1000); // Delay of 1 second
-    })
-    .catch(error => {
-      console.error("error",error);
-    });
-  }
-  const handleSubmit2 = async (event) => {
+  const handleSubmit = async (event) => {
     try {
-      const response = await axios.post('/seller/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      axios.post('/seller/upload', formData,{
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }).then(response => {
+        setTimeout(() => {
+          setResponseText(`Item Posted Successfully With Id : ${response?.data?.id}`); // Set the response text to be shown in the modal
+          setShowModal(true); // Show the modal
+        }, 1000); // Delay of 1 second
+      })
+      .catch(error => {
+        console.error("error",error);
       });
-
-      if (response.status === 200) {
-        console.log('Image uploaded successfully');
-        // Reset form fields
-        //setTitle('');
-        setImage(null);
-      } else {
-        console.error('Image upload failed');
-      }
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -79,7 +60,7 @@ const SegmentExampleNestedSegments = () => {
       <Segment>
       <Segment textAlign='center'> <h3>Item Details</h3></Segment>
         <p></p>{' '}
-        <Form ref={formRef} onSubmit={handleSubmit2}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
         <Form.Field>
         <label>Item Details</label>
         <Input name="item_name" 
@@ -90,7 +71,7 @@ const SegmentExampleNestedSegments = () => {
         <p></p>
         <Form.Field>
           <Input name="item_year"
-           focus placeholder="Item Year"
+           focus placeholder="Item Manufacture Year"
            value={formData.item_year} 
            onChange={handleInputChange} />
         </Form.Field>
@@ -102,28 +83,29 @@ const SegmentExampleNestedSegments = () => {
           onChange={handleInputChange}
           />
         </Form.Field>
-        <p></p>
+        {/* <p></p>
         <Form.Field>
           <Input name="item_place"
           focus placeholder="Item Place..." 
           value={formData.item_place} 
           onChange={handleInputChange}
           />
-          </Form.Field>
-        <p></p>
+          </Form.Field> */}
+        {/* <p></p>
         <Form.Field>
           <Input name="address"
           focus placeholder="Address..." 
           value={formData.address} 
           onChange={handleInputChange}
           />
-        </Form.Field>
+        </Form.Field> */}
         <p></p>
         <Form.Field>
         <label>Seller Details</label>
         <Input name="name" 
           focus placeholder="Name..."
           value={formData.name} 
+          defaultValue={formData.name}
           onChange={handleInputChange} />
         </Form.Field>
         <p></p>
@@ -131,21 +113,15 @@ const SegmentExampleNestedSegments = () => {
           <Input name="phone"
            focus placeholder="Phone Number"
            value={formData.phone} 
+           defaultValue={formData.phone}
            onChange={handleInputChange} />
-        </Form.Field>
-        <p></p>
-        <Form.Field>
-          <Input name="landMark"
-          focus placeholder="Land Mark..." 
-          value={formData.landMark} 
-          onChange={handleInputChange}
-          />
         </Form.Field>
         <p></p>
         <Form.Field>
           <Input name="city"
           focus placeholder="Village/City..." 
           value={formData.city} 
+          defaultValue={formData.city}
           onChange={handleInputChange}
           />
           </Form.Field>
@@ -154,16 +130,18 @@ const SegmentExampleNestedSegments = () => {
           <Input name="address"
           focus placeholder="Address..." 
           value={formData.address} 
+          defaultValue={formData.address}
           onChange={handleInputChange}
           />
         </Form.Field>
         <p></p>    
         <Form.Field>
           <label>Item Details</label>
-          <TextArea name='billingInstructions'
+          <TextArea name='description'
           rows={2} 
-          placeholder='Describe...' 
-          value={formData.billingInstructions} 
+          placeholder='Description...' 
+          value={formData.description} 
+          defaultValue={formData.description}
           onChange={handleInputChange}/>
         </Form.Field>
         <div>
