@@ -9,7 +9,11 @@ export class EnquiryService {
     private db: PrismaService,
   ) {}
   async getAllEnquiries() {
-    const result = await this.db.enquiry.findMany({});
+    const result = await this.db.enquiry.findMany({
+      include:{
+        item:true
+      }
+    });
     console.log('result', result);
     return result;
   }
