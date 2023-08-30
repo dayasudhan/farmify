@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Table,Button,Input,Segment ,Header,Dropdown} from 'semantic-ui-react';
 import { useContext } from 'react';
 import 'semantic-ui-css/semantic.css';
+import Header2 from '../common/header';
+import Footer from '../common/footer';
 //import { AuthContext } from './../authContext';
 //import './table.css'
 function CustomerListComponent() {
@@ -59,9 +61,20 @@ function CustomerListComponent() {
     console.log("value",value,data)
 
     //Filter the data based on the search query
-    const filteredResults = data.filter((item) =>
-      item?.[searchKey]?.toLowerCase().includes(value.toLowerCase())
-    );
+    const filteredResults = data.filter((item) =>{
+      if( searchKey == 'name')
+      {
+        item?.['item'][searchKey]?.toLowerCase().includes(value.toLowerCase())
+      }
+      else if(searchKey == 'itemId')
+      {
+        item?.['item']['id']?.includes(value.toLowerCase())
+      }
+      else
+      {
+        item?.[searchKey]?.toLowerCase().includes(value.toLowerCase())
+      }
+  });
 
       setFilteredData(filteredResults);
   };
@@ -72,20 +85,17 @@ function CustomerListComponent() {
 
   };
   const searchOptions = [
-    { key: 1, text: 'Name', value: 'name' },
-    { key: 2, text: 'Id', value: 'id' },
-    { key: 3, text: 'ItemId', value: 'id' },
+    { key: 1, text: 'Item Name', value: 'name' },
+    { key: 3, text: 'ItemId', value: 'itemId' },
     { key: 4, text: 'City', value: 'city' },
     { key: 5, text: 'Phone', value: 'phone' },
   ]
   
   return (
     <div>
-     
- 
-     <Segment heading>
-    
-   
+          <Segment>
+    <Header2 />
+      <Segment heading>   
        <Dropdown 
        placeholder='Search Key' 
        search 
@@ -101,7 +111,7 @@ function CustomerListComponent() {
         onChange={handleSearchChange}
       />
        <Header as='h2' floated='right'>
-      Customer Table
+      Enquiry Table
     </Header>
   </Segment>
  
@@ -110,7 +120,7 @@ function CustomerListComponent() {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell width={1}>#</Table.HeaderCell>
-          {/* <Table.HeaderCell width={2}>Id</Table.HeaderCell> */}
+          <Table.HeaderCell width={2}>Image</Table.HeaderCell>
           <Table.HeaderCell width={2}>ItemId</Table.HeaderCell>
           <Table.HeaderCell width={3}>Item Name</Table.HeaderCell>
           <Table.HeaderCell width={5}>Name</Table.HeaderCell>
@@ -123,10 +133,15 @@ function CustomerListComponent() {
           <React.Fragment key={item.id}>
           <Table.Row  onClick={() => handleRowClick(index)}>
             <Table.Cell>{index + 1}</Table.Cell>
+            <Table.Cell>
+          {/* Add the thumbnail image here */}
+          <img src={item.item.image_urls[0]} alt="Thumbnail" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+        </Table.Cell>
             <Table.Cell>{item.itemId}</Table.Cell>
             <Table.Cell>{item.item.name}</Table.Cell>
             <Table.Cell>{item.name}</Table.Cell>
             <Table.Cell>{item.phone}</Table.Cell>
+           
             {/* <Table.Cell>
               <Button primary onClick={() => handleDetailButtonClick(item._id)}>Aggrement</Button>
             </Table.Cell> */}
@@ -148,6 +163,8 @@ function CustomerListComponent() {
         ))}
       </Table.Body>
     </Table>
+    <Footer />
+  </Segment>
   </div>
   );
 }

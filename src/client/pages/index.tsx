@@ -8,7 +8,7 @@ const Home: NextPage = () => {
       <Link href="/buyer/landing/landing">
         <a>Buyer!</a>
       </Link>
-      <Link href="/seller/home">
+      <Link href="/seller/post">
         <a>Seller!</a>
       </Link>
     </h1>

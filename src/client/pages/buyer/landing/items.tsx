@@ -20,9 +20,9 @@ const Items = () => {
 
   return (
     <Segment>
-      <Segment inverted color="teal" textAlign="left">
+      {/* <Segment inverted color="teal" textAlign="left">
         Items
-      </Segment>
+      </Segment> */}
       <Grid Doubling container columns={3}>
         <Grid.Row columns={4}>
           {menu?.map((element) => (
