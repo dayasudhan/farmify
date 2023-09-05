@@ -1,50 +1,225 @@
-import React from 'react';
-import { Image, List, Rating } from 'semantic-ui-react';
+import { Image, List, Rating,Segment,Grid ,Form, Button,Modal} from 'semantic-ui-react';
+import { useRouter } from 'next/router';
+import React, { Component, useEffect ,useState} from 'react';
+
+import Header from '../../common/header';
+import Footer from '../../common/footer';
+import ImageGallery from './imagegallery';
+import ImageGallery2 from './horizontalgalley';
+import 'semantic-ui-css/semantic.css';
+import axios from 'axios';
 import Link from 'next/link';
+const baseURL = 'http://localhost:3000/seller/items/';
+const imageUrls = [
+  'https://kisanadda.s3.amazonaws.com/thumbnail-503352340-1693149765489-.jpeg',
+  'https://kisanadda.s3.amazonaws.com/thumbnail-909363098-1693232134044-.jpeg',
+  'https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-580357250-1693232797622-.jpeg'
+];
+const enquiryURL = 'http://localhost:3000/seller/enquiry';
+const Item = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    itemId: '',
+    city:'',
+    state:'Karnataka',
+    zipCode:''
+  });
+ const [data, setData] = useState(null) 
+ const [imageUrl,setImageUrl] = useState(null) 
+ 
+ 
 
-const Item = () => (
-  <div>
-    <div className="product-grid6">
-      <div className="product-image6">
-        <Image
-          src="https://semantic-ui.com/images/wireframe/image.png"
-          size="medium"
-          as="a"
-          href="#"
-        />
-        <span className="product-new-label">New</span>
-      </div>
-      <div className="product-content">
-        <h3 className="ui header">
-          <Link href="/buyer/cart/cart">
-            <a>buy</a>
-          </Link>
+ const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  setFormData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+const openModal = () => {
+  console.log("id",id)
+  setFormData((prevData) => ({
+  ...prevData,
+  ['itemId']: id,
+}));
+  setModalOpen(true);
+};
 
-          <div href="#" className="sub header">
-            Text 2
+const closeModal = () => {
+  setModalOpen(false);
+};
+const openSuccessModal = () => {
+
+  setSuccessModalOpen(true);
+};
+
+const closeSuccessModal = () => {
+  setSuccessModalOpen(false);
+};
+const saveData = () => {
+
+  // Perform Axios POST request here
+  axios.post(enquiryURL, formData)
+    .then(response => {
+      console.log('Data saved successfully:', response.data);
+      closeModal();
+      openSuccessModal();
+    })
+    .catch(error => {
+      console.error('Error saving data:', error);
+    });
+};
+ React.useEffect(() => {
+  console.log('reacteffect');
+  const url = baseURL + id;
+  {id && axios.get(url).then((response) => {
+    setData(response.data);
+    setImageUrl(response.data?.image_urls[0]);
+    console.log('response', response.data);
+   
+  })}
+},id);
+  console.log("Dayasudhan",router)
+
+  return (
+    <div>
+    <Segment>
+    <Header />
+    <Grid divided="vertically">
+      <Grid.Row columns={2}>
+        <Grid.Column>
+          {/* {imageUrl && (
+            <Image src={imageUrl} />
+          )} */}
+   
+           <ImageGallery2 imageUrls={imageUrls}/>
+      
+        </Grid.Column>
+        <Grid.Column>
+          <div>
+            <Link href="/buyer/cart/cart">
+              <a>{data?.name}</a>
+            </Link>
+            <h1 className="ui header">
+              <div href="#" className="header">
+                {data?.name}
+              </div>
+            </h1>
+
+            <br />
+            <br />
+            <div className="price">
+              Description: {data?.description}
+              <br />
+              Manufacture Year: {data?.makeYear}
+              <br />
+              Price/Rate: Rs {data?.price} 
+              <br />
+              <br />
+              <b>Seller Details: </b>
+              <br />
+              Name: {data?.price} 
+              <br />      
+              Phone: {data?.phone} 
+              <br />          
+              Address: {data?.address1} 
+              <br />     
+              city: {data?.city} 
+              <br />
+              state: {data?.state} 
+              <br />
+            </div>
+            <Rating icon="star" defaultRating={5} maxRating={5} />
+            <h3 className="ui header">
+
+              <div>
+             
+                  <Button primary onClick={openModal}>Contact / Enquiry</Button>
+                  <Modal open={modalOpen} onClose={closeModal}>
+                    <Modal.Header>Add Buyer details</Modal.Header>
+                    <Modal.Content>
+                      <Form>
+                        <Form.Field>
+                          <label>Name</label>
+                          <input
+                            name="name"
+                            placeholder="Name..."
+                            value={formData.name}
+                            onChange={handleInputChange}
+                          />
+                        </Form.Field>
+                        <Form.Field>
+                          <label>Phone</label>
+                          <input
+                            name="phone"
+                            placeholder="Phone..."
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                          />
+                        </Form.Field>
+                        <Form.Field>
+                          <label>Address</label>
+                          <input
+                            name="address"
+                            placeholder="Address..."
+                            value={formData.address}
+                            onChange={handleInputChange}
+                          />
+                        </Form.Field>
+                      </Form>
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button onClick={closeModal}>Cancel</Button>
+                      <Button positive onClick={saveData}>
+                        Submmit
+                      </Button>
+                    </Modal.Actions>
+                  </Modal>
+               {/* Success Modal */}
+              <Modal open={successModalOpen} onClose={closeSuccessModal}>
+                <Modal.Header>Enquiry Success</Modal.Header>
+                <Modal.Content>
+                  <p>Enquiry sent successfully!.</p>
+                  <p>Seller will contact you soon </p>
+                  <p>Thank You</p>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button positive onClick={closeSuccessModal}>
+                    Close
+                  </Button>
+                </Modal.Actions>
+              </Modal>
+                {/* <a href="/buyer/cart/cart">
+                  <Button primary>Buy1</Button>
+                </a> */}
+              </div>
+            </h3>
           </div>
-        </h3>
-        <Rating icon="star" defaultRating={5} maxRating={5} />
-        <br />
-        <br />
-        <div className="price">
-          $11.00
-          <span>$14.00</span>
-        </div>
-      </div>
-      <List className="social" horizontal>
-        <List.Item>
-          <List.Icon circular name="eye" size="large" />
-        </List.Item>
-        <List.Item>
-          <List.Icon circular name="heart" size="large" />
-        </List.Item>
-        <List.Item>
-          <List.Icon circular name="cart arrow down" size="large" />
-        </List.Item>
-      </List>
-    </div>
+        </Grid.Column>
+      </Grid.Row>
+
+      {/* <Grid.Row columns={3}>
+        <Grid.Column>
+          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
+        </Grid.Column>
+        <Grid.Column>
+          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
+        </Grid.Column>
+        <Grid.Column>
+          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
+        </Grid.Column>
+      </Grid.Row> */}
+    </Grid>
+    <Footer />
+  </Segment>
   </div>
-);
+  )
+}
 
 export default Item;

@@ -6,7 +6,10 @@ const Home: NextPage = () => {
     <h1 className="title">
       Read{' '}
       <Link href="/buyer/landing/landing">
-        <a>Carousal!</a>
+        <a>Buyer!</a>
+      </Link>
+      <Link href="/seller/post">
+        <a>Seller!</a>
       </Link>
     </h1>
   );
