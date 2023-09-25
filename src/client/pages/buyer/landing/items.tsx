@@ -3,8 +3,8 @@ import Item from './item';
 import { Grid, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000/seller/items';
-//const baseURL = 'http://localhost:3000/menu';
+const baseURL = 'http://localhost:4000/seller/items';
+//const baseURL = 'http://localhost:4000/menu';
 const Items = () => {
   const [menu, setMenu] = React.useState([
   ]);

@@ -9,13 +9,13 @@ import ImageGallery2 from './horizontalgalley';
 import 'semantic-ui-css/semantic.css';
 import axios from 'axios';
 import Link from 'next/link';
-const baseURL = 'http://localhost:3000/seller/items/';
+const baseURL = 'http://localhost:4000/seller/items/';
 const imageUrls = [
   'https://kisanadda.s3.amazonaws.com/thumbnail-503352340-1693149765489-.jpeg',
   'https://kisanadda.s3.amazonaws.com/thumbnail-909363098-1693232134044-.jpeg',
   'https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-580357250-1693232797622-.jpeg'
 ];
-const enquiryURL = 'http://localhost:3000/seller/enquiry';
+const enquiryURL = 'http://localhost:4000/seller/enquiry';
 const Item = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -44,10 +44,10 @@ const Item = () => {
 };
 const openModal = () => {
   console.log("id",id)
-  setFormData((prevData) => ({
-  ...prevData,
-  ['itemId']: id,
-}));
+// setFormData((prevData) => ({
+// ...prevData,
+// ['itemId']: id,
+// }));
   setModalOpen(true);
 };
 
@@ -84,7 +84,7 @@ const saveData = () => {
     console.log('response', response.data);
    
   })}
-},id);
+});
   console.log("Dayasudhan",router)
 
   return (

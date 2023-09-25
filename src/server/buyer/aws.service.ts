@@ -1,6 +1,6 @@
 import { Injectable, Req, Res } from '@nestjs/common';
 import * as AWS from 'aws-sdk';
-import * as sharp from 'sharp';
+//import * as sharp from 'sharp';
 @Injectable()
 export class AwsService {
   AWS_S3_BUCKET = process.env.S3BUCKET;
