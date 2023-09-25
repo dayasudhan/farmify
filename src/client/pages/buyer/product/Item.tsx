@@ -44,10 +44,10 @@ const Item = () => {
 };
 const openModal = () => {
   console.log("id",id)
-// setFormData((prevData) => ({
-// ...prevData,
-// ['itemId']: id,
-// }));
+  setFormData((prevData) => ({
+  ...prevData,
+  ['itemId']: id,
+}));
   setModalOpen(true);
 };
 
@@ -84,7 +84,7 @@ const saveData = () => {
     console.log('response', response.data);
    
   })}
-});
+},id);
   console.log("Dayasudhan",router)
 
   return (
