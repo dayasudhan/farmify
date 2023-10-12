@@ -11,9 +11,9 @@ import axios from 'axios';
 import Link from 'next/link';
 const baseURL = 'http://localhost:4000/seller/items/';
 const imageUrls = [
-  'https://kisanadda.s3.amazonaws.com/thumbnail-503352340-1693149765489-.jpeg',
-  'https://kisanadda.s3.amazonaws.com/thumbnail-909363098-1693232134044-.jpeg',
-  'https://kisanadda.s3.ap-south-1.amazonaws.com/thumbnail-580357250-1693232797622-.jpeg'
+  'https://farmifyequipments.s3.amazonaws.com/thumbnail-665949102-1695639571579-.jpeg',
+  'https://farmifyequipments.s3.amazonaws.com/thumbnail-665949102-1695639571579-.jpeg',
+  'https://farmifyequipments.s3.amazonaws.com/thumbnail-665949102-1695639571579-.jpeg'
 ];
 const enquiryURL = 'http://localhost:4000/seller/enquiry';
 const Item = () => {

@@ -28,7 +28,7 @@ export class EnquiryController {
   @Post('/enquiry')
   async post(@Req() req: any, @Res() res: any) {
 
-    console.log('request body', req.body);
+    console.log('enquery request body', req.body);
     const ret = await this.service.insertEnuiry(req.body);
     console.log('return', ret);
     res.send(ret);
